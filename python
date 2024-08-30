@@ -1,0 +1,18 @@
+a = [1, 2, 3]  # Memory allocated for the list, reference count is 1
+b = a          # Reference count increases to 2
+del a          # Reference count decreases to 1
+del b          # Reference count drops to 0, memory is freed
+
+# Garbage collection example with circular reference
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+node1 = Node(1)
+node2 = Node(2)
+node1.next = node2
+node2.next = node1  # Circular reference
+
+del node1  # Memory not freed immediately due to circular reference
+del node2  # Garbage collector will clean up when it detects the cycle
